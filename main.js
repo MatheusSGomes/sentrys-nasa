@@ -7,21 +7,20 @@ async function loadSentry() {
     const sentrysList = [];
     
     sentrys.forEach(sentry => {
-      const minAge = sentry['year_range_min']
-      const maxAge = sentry['year_range_max']
       const id = sentry['sentryId']
       const name = sentry['fullname']
+      const yearMin = sentry['year_range_min']
+      const yearMax = sentry['year_range_max']
   
-      const newSentry = new Sentry(id, name, minAge, maxAge);
-      sentrysList.push(newSentry)
+      const newSentry = new Sentry(id, name, yearMin, yearMax);
+      sentrysList.push(newSentry);
     })
     
-    // renderList(sentrysList);
     localStorage.clear();
     localStorage.setItem('sentrys', JSON.stringify(sentrysList));
   
   } catch (error) {
-    console.log('Erro');
+    console.log('Erro por excesso de requisições');
 
   } finally {
 
@@ -31,12 +30,12 @@ async function loadSentry() {
 }
 
 function renderList(sentrys) {
-  const ulElement = document.querySelector('#ul-sentry');
+  const ulElement = document.querySelector('#sentry-objects');
   
   sentrys.forEach(sentry => {
     const li = document.createElement('li');
 
-    const content = `(${sentry.id}) ${sentry.name}: risco de colisão entre o ano ${sentry.minAge} e o ano ${sentry.maxAge}`;
+    const content = `<strong>Sentry: ${sentry.name}</strong> ID: ${sentry.id}  - risco de colisão com a Terra entre o ano <i>${sentry.yearMin}</i> e o ano <i>${sentry.yearMax}</i>.`;
 
     li.innerHTML = content;
   

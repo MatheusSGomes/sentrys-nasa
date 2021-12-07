@@ -1,8 +1,8 @@
 export default class SentryObjects {
-  constructor(sentryId, name, minAge, maxAge) {
+  constructor(sentryId, name, yearMin, yearMax) {
     this.id = sentryId;
     this.name = name;
-    this.minAge = minAge;
-    this.maxAge = maxAge;
+    this.yearMin = yearMin;
+    this.yearMax = yearMax;
   }
 }
